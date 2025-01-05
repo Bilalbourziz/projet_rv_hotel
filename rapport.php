@@ -3,7 +3,7 @@ session_start();
 require './database/db.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-// Check if the user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: sing_in.php");
     exit();
@@ -21,7 +21,7 @@ $count_sql->execute();
 $count_result = $count_sql->get_result();
 $data_count = $count_result->fetch_assoc();
 $total_reservations = $data_count['total_reservations'];
-// Fetch reservation data for the logged-in user
+
 $sql = $conn->prepare("
     SELECT  
        r.id AS reservation_id, 
@@ -37,7 +37,7 @@ $sql = $conn->prepare("
     JOIN Rooms rm ON r.room_id = rm.id 
     JOIN chambre c ON r.chambre_id = c.chambre_id 
     JOIN Hotels h ON r.hotel_id = h.id
-    WHERE r.user_id = ?
+    WHERE r.user_id = ? and etat_reserve='termine'
 ");
 $sql->bind_param("i", $user_id);
 $sql->execute();
@@ -48,11 +48,11 @@ while ($row = $result->fetch_assoc()) {
     $data_client[] = $row;
 }
 
-// Handle delete request
+
 if (isset($_GET['id'])) {
     $reserve_id = intval($_GET['id']);
 
-    // Ensure the reservation belongs to the logged-in user
+   
     $delete_sql = $conn->prepare("
         DELETE FROM Reservations 
         WHERE id = ? AND user_id = ?
@@ -60,7 +60,7 @@ if (isset($_GET['id'])) {
     $delete_sql->bind_param("ii", $reserve_id, $user_id);
 
     if ($delete_sql->execute()) {
-        // Redirect back to the page after deletion
+        
         header("Location: rapport.php");
         exit();
     } else {
@@ -90,7 +90,7 @@ if (isset($_GET['id'])) {
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
-            // Redirect to the delete URL
+            
             window.location.href = deleteUrl;
         }
     });

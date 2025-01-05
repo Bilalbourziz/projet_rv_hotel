@@ -4,24 +4,24 @@ require 'database/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['button1'])) {
-        // Ensure the user is logged in 
+        
         if (!isset($_SESSION['user_id'])) {
             header("Location: sign_in.php");
             exit();
         }
 
-        // Retrieve data from the form
+       
         $user_id = $_SESSION['user_id'];
         $hotel_id = intval($_POST['hotel_id']);
         $room_id = intval($_POST['room']);
-        $chambre_number = intval($_POST['chambre_number']); // Chambre Number entered by the user
+        $chambre_number = intval($_POST['chambre_number']); 
         $check_in_date = $_POST['check-in'];
         $check_out_date = $_POST['check-out'];
         $adults_count = intval($_POST['adults']);
         $children_count = intval($_POST['children']);
 
         try {
-            // Validate chambre_number against the database and ensure it's disponible
+            
             $stmt = $conn->prepare(
                 "SELECT chambre_id 
                 FROM chambre 
@@ -60,10 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
 
             if ($stmt->execute()) {
-                // Store the reservation ID in the session
+                
                 $_SESSION['reserve_id'] = $conn->insert_id;
 
-                // Redirect to success page
+                
                 header("Location: payement_page.php");
                 exit();
             } else {
@@ -71,17 +71,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } 
         catch (Exception $e) {
-            // Handle errors gracefully
+           
             $_SESSION['error_message'] = $e->getMessage();
             header("Location: error.php");
             exit();
         } finally {
-            // Close resources
+            
             if (isset($stmt)) $stmt->close();
             if (isset($conn)) $conn->close();
         }
     } else {
-        // Redirect if the script is accessed without a POST request
+        
         header("Location: index.php");
         exit();
     }

@@ -87,10 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $(document).ready(function () {
       $("#checkAvailability").on("click", function () {
-          const hotelId = $('input[name="hotel_id"]').val(); // Dynamic hotel ID
-          const roomId = $('select[name="room"]').val(); // Room type
+          const hotelId = $('input[name="hotel_id"]').val(); 
+          const roomId = $('select[name="room"]').val(); 
   
-          // Send AJAX request to fetch room availability
+          // Send AJAX to fetch room availability
           $.ajax({
               url: "check_rooms.php",
               method: "POST",
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
                           width: "40%"
                       });
   
-                  // Close button
+                  
                   const closeButton = $("<button'><i class='fa-solid fa-square-xmark'></i></button>")
                       
                       .css({
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $(".close").on("click", function () {
         
 
-        // Or remove it entirely from the DOM
+        
          $("#reservation-form").hide();
     });
 

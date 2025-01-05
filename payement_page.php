@@ -1,67 +1,67 @@
 <?php
 session_start();
-require_once('./database/db.php'); // Include your database connection
+require_once('./database/db.php'); 
 
-// Ensure the user is logged in and a reservation exists
+
 if (!isset($_SESSION['reserve_id'])) {
-    // Redirect to the reservation page or show an error if no reserve_id
+   
+    
     header("Location: reserve.php");
     exit();
 }
 
-// Initialize the price variable
+
 $price = 0;
 
-// Check if the request method is POST
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get payment information from the form
-    $reserve_id = $_SESSION['reserve_id']; // Retrieve the reserve_id from the session
+    
+    $reserve_id = $_SESSION['reserve_id']; 
     $card_num = $_POST['credit-card-num'];
     $exp_month = $_POST['expiration-month'];
-    $exp_year = $_POST['expiration-year']; // Corrected typo
+    $exp_year = $_POST['expiration-year']; 
     $cvv = $_POST['cvv'];
 
-    // Sanitize inputs (optional but recommended)
+    
     $card_num = htmlspecialchars($card_num);
     $exp_month = htmlspecialchars($exp_month);
     $exp_year = htmlspecialchars($exp_year);
     $cvv = htmlspecialchars($cvv);
 
-    // Validate the payment data
+    
     if (empty($card_num) || empty($exp_month) || empty($exp_year) || empty($cvv)) {
         $_SESSION['payment_error'] = "Please fill in all the payment details.";
         header("Location: payement_page.php");
         exit();
     }
 
-    // Check if the card number is valid (simple validation)
-    if (!preg_match("/^[0-9]{13,19}$/", $card_num)) {
+    
+    if (!preg_match("/^[0-9]{16}$/", $card_num)) {
         $_SESSION['payment_error'] = "Invalid card number. Please check your card details.";
         header("Location: payement_page.php");
         exit();
     }
 
-    // Prepare SQL statement to insert payment data into the database
+    
     $stmt = $conn->prepare(
         "INSERT INTO Payments (reserve_id, card_num, exp_month, exp_year, cvv) 
         VALUES (?, ?, ?, ?, ?)"
     );
     $stmt->bind_param("issss", $reserve_id, $card_num, $exp_month, $exp_year, $cvv);
 
-    // Execute the query
+    
     if ($stmt->execute()) {
-        // Payment successful, redirect to a confirmation page or show a success message
-        header("Location: success.php"); // You can create a success page
+        
+        header("Location: success.php");
         exit();
     } else {
-        // Handle error
+      
         $_SESSION['payment_error'] = "There was an error processing your payment. Please try again.";
         header("Location: payement_page.php");
         exit();
     }
 }
 
-// Prepare the SQL statement to fetch the price
 $sql = $conn->prepare("
 SELECT Ro.prices AS price 
 FROM Rooms Ro 
@@ -69,18 +69,17 @@ JOIN Reservations R ON R.room_id = Ro.id
 WHERE R.id = ?
 ");
 
-// Bind the parameter (assuming $reserve_id is an integer)
-$sql->bind_param("i", $_SESSION['reserve_id']); // Assuming the reserve_id is an integer
 
-// Execute the query
+$sql->bind_param("i", $_SESSION['reserve_id']);
+
 $sql->execute();
 
-// Get the result
+
 $result = $sql->get_result();
 
-// Fetch the price from the result
+
 if ($row = $result->fetch_assoc()) {
-    $price = $row['price'];  // Get the price for the room
+    $price = $row['price'];  
 }
 
 ?>

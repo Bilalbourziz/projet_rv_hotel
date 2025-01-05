@@ -23,7 +23,8 @@ FROM Reservations r
 JOIN Users u ON r.user_id = u.id 
 JOIN Rooms rm ON r.room_id = rm.id 
 JOIN chambre c ON r.chambre_id = c.chambre_id 
-JOIN Hotels h ON r.hotel_id = h.id;
+JOIN Hotels h ON r.hotel_id = h.id
+where etat_reserve='termine';
 
 ");
 $sql2->execute();
@@ -61,7 +62,7 @@ while ($row = $result4->fetch_assoc()) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GeeksForGeeks</title>
+    <title>Admin page</title>
     <!--<link rel="stylesheet"
         href="style.css">-->    
     <link rel="stylesheet"
@@ -186,41 +187,41 @@ while ($row = $result4->fetch_assoc()) {
 
                 <div class="box box1">
                     <div class="text">
-                        <h2 class="topic-heading">60.5k</h2>
-                        <h2 class="topic">Article Views</h2>
+                        <h2 class="topic-heading">15</h2>
+                        <h2 class="topic">membress</h2>
                     </div>
 
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
+                    <img src="https://cdn-icons-png.flaticon.com/512/1370/1370267.png"
                         alt="Views">
                 </div>
 
                 <div class="box box2">
                     <div class="text">
-                        <h2 class="topic-heading">150</h2>
-                        <h2 class="topic">Likes</h2>
+                        <h2 class="topic-heading">3</h2>
+                        <h2 class="topic">hotels</h2>
                     </div>
 
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
+                    <img src="https://cdn-icons-png.flaticon.com/512/3009/3009710.png"
                         alt="likes">
                 </div>
 
                 <div class="box box3">
                     <div class="text">
-                        <h2 class="topic-heading">320</h2>
-                        <h2 class="topic">Comments</h2>
+                        <h2 class="topic-heading">4500$</h2>
+                        <h2 class="topic">salary/month</h2>
                     </div>
 
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
+                    <img src="https://cdn-icons-png.flaticon.com/512/1194/1194711.png"
                         alt="comments">
                 </div>
 
                 <div class="box box4">
-                    <div class="text">
-                        <h2 class="topic-heading">70</h2>
-                        <h2 class="topic">Published</h2>
+                       <div class="text">
+                         <h2 class="topic-heading">50</h2>
+                            <h2 class="topic">reservation effecetue</h2>
                     </div>
 
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
+                    <img src="https://cdn-icons-png.flaticon.com/512/25/25404.png" alt="published">
                 </div>
             </div>
 <!--here i put the table--->
@@ -298,7 +299,7 @@ while ($row = $result4->fetch_assoc()) {
                 <td style="padding: 10px; border: 1px solid #ddd;"><?= $Reserves ['check_out'] ?></td>
                 <td style="padding: 10px; border: 1px solid #ddd;"><?= $Reserves ['children'] ?></td>
                 <td style="padding: 10px; border: 1px solid #ddd;">
-                   <a href="edit.php?id=<?= $Reserves ['reservation_id'] ?>" 
+                   <a href="editReserve.php?id=<?= $Reserves ['reservation_id'] ?>" 
                        style="display: inline-block; padding: 5px 15px; background-color:rgb(0, 160, 85); color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
                        edit
                     </a>
@@ -337,7 +338,7 @@ while ($row = $result4->fetch_assoc()) {
                 <td style="padding: 10px; border: 1px solid #ddd;">  <?= $Hotels['contact_info'] ?></td>
                 
                 <td style="padding: 10px; border: 1px solid #ddd;">
-                   <a href="editReserve.php?id=<?= $Hotels['id'] ?>" 
+                   <a href="editHotels.php?id=<?= $Hotels['id'] ?>" 
                        style="display: inline-block; padding: 5px 15px; background-color:rgb(0, 160, 85); color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
                        edit
                     </a>
@@ -380,7 +381,7 @@ while ($row = $result4->fetch_assoc()) {
 
                 
                 <td style="padding: 10px; border: 1px solid #ddd;">
-                   <a href="edit.php?id=<?= $Rooms['id'] ?>" 
+                   <a href="editRooms.php?id=<?= $Rooms['id'] ?>" 
                        style="display: inline-block; padding: 5px 15px; background-color:rgb(0, 160, 85); color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
                        edit
                     </a>

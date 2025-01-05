@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ session_start(); // Start the session
 </head>
 <body>
     <div class="container">
-        <h1>Error!</h1>
+        <h1>you have a problem</h1>
         <p>There was an issue processing your request. Please try again later.</p>
         <?php if (isset($_SESSION['error_message'])): ?>
             <p>Error Details: <?php echo htmlspecialchars($_SESSION['error_message']); ?></p>

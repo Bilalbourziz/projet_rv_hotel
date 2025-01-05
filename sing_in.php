@@ -15,14 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result && $result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        // Verify the password (direct comparison)
+    
         if ($user['password'] === $password) {
             // Authentication successful
             $_SESSION['user_id'] = $user['id']; // Store user ID in session
             $_SESSION['user_name'] = $user['name']; // Store user name in session
             $_SESSION['logged_in'] = true; // Track login status
 
-            // Redirect based on role
+          
             if ($user['Role'] === 'client') {
                 header("Location: index.php"); // Redirect to client index page
             } else {

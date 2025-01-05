@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
 
     $delete_sql = $conn->prepare("
         DELETE FROM Reservations 
-        WHERE id = ?
+        WHERE id = ? and etat_reserve='termine'
     ");
     $delete_sql->bind_param("i", $reserve_id);
 

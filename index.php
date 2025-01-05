@@ -62,11 +62,10 @@ if (!isset($_SESSION['user_id'])) {
               </button>
             </nav>
           </div>
-        </div><!-- navbar-area end -->
-      
+        </div>
         <div class="intro-area">
           <div class="container">
-            <h2 class="title"><strong align="center">Hôtels à Tanger</strong></h2>
+            <h2 class="title"><strong align="center">Hôtels à Rabat</strong></h2>
             <p align="center" class="element">Les meilleurs hôtels pas chers</p>
           </div>
           <div class="wrapper">
@@ -101,13 +100,15 @@ if (!isset($_SESSION['user_id'])) {
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                <i class="fa-solid fa-star"></i>
+               
             </div>
            
             </div>
                 <p>Un havre prestigieux dans une ville d’élite, où luxe et distinction redéfinissent l’hospitalité.</p>
                 <p> <i class="fa-solid fa-bath"></i> |
                 <i class="fa-solid fa-bed"></i> |
-                <i class="fa-solid fa-wifi"></i>
+                <i class="fa-solid fa-wifi"></i> |
+                <i class="fa-solid fa-utensils"></i>
             </p>
        
         </div>
@@ -136,7 +137,8 @@ if (!isset($_SESSION['user_id'])) {
                 <p>Un refuge d'élégance au cœur du centre-ville, où confort et raffinement s'unissent pour une escapade urbaine mémorable.</p>
                 <p> <i class="fa-solid fa-bath"></i> |
                 <i class="fa-solid fa-bed"></i> |
-                <i class="fa-solid fa-wifi"></i>
+                <i class="fa-solid fa-wifi"></i> | 
+                <i class="fa-solid fa-utensils"></i>
             </p>
        
         </div>
@@ -165,7 +167,10 @@ if (!isset($_SESSION['user_id'])) {
                 <p>Un havre de paix au bord de la mer, où luxe et sérénité se rencontrent pour une expérience inoubliable.</p>
                 <p> <i class="fa-solid fa-bath"></i> |
                 <i class="fa-solid fa-bed"></i> |
-                <i class="fa-solid fa-wifi"></i>
+                <i class="fa-solid fa-wifi"></i> | 
+                <i class="fa-solid fa-utensils"></i> |
+                <i class="fa-solid fa-person-swimming"></i>
+
             </p>
        
         </div>
